@@ -1,0 +1,99 @@
+{
+    "S3": [
+        {"command": "aws s3 ls", "description": "List all S3 buckets"},
+        {"command": "aws s3 cp <source> <destination>", "description": "Copy files to/from S3"},
+        {"command": "aws s3 sync <source> <destination>", "description": "Sync files between local and S3"},
+        {"command": "aws s3 mb s3://<bucket-name>", "description": "Create a new S3 bucket"},
+        {"command": "aws s3 rb s3://<bucket-name> --force", "description": "Delete an S3 bucket and all its contents"},
+        {"command": "aws s3api put-bucket-versioning --bucket <bucket-name> --versioning-configuration Status=Enabled", "description": "Enable versioning on an S3 bucket"}
+    ],
+    "EC2": [
+        {"command": "aws ec2 describe-instances --region <region>", "description": "Describe EC2 instances in a region"},
+        {"command": "aws ec2 start-instances --instance-ids <instance_id>", "description": "Start a specific EC2 instance"},
+        {"command": "aws ec2 stop-instances --instance-ids <instance_id>", "description": "Stop a specific EC2 instance"},
+        {"command": "aws ec2 reboot-instances --instance-ids <instance_id>", "description": "Reboot a specific EC2 instance"},
+        {"command": "aws ec2 terminate-instances --instance-ids <instance_id>", "description": "Terminate a specific EC2 instance"},
+        {"command": "aws ec2 describe-security-groups --region <region>", "description": "List all security groups in a region"},
+        {"command": "aws ec2 create-security-group --group-name <group-name> --description <description> --vpc-id <vpc-id>", "description": "Create a new security group"},
+        {"command": "aws ec2 authorize-security-group-ingress --group-id <group-id> --protocol <protocol> --port <port> --cidr <cidr>", "description": "Add an inbound rule to a security group"}
+    ],
+    "IAM": [
+        {"command": "aws iam list-users", "description": "List all IAM users"},
+        {"command": "aws iam create-user --user-name <username>", "description": "Create a new IAM user"},
+        {"command": "aws iam delete-user --user-name <username>", "description": "Delete an IAM user"},
+        {"command": "aws iam list-roles", "description": "List all IAM roles"},
+        {"command": "aws iam create-role --role-name <role-name> --assume-role-policy-document file://policy.json", "description": "Create a new IAM role"},
+        {"command": "aws iam attach-role-policy --role-name <role-name> --policy-arn <policy-arn>", "description": "Attach a policy to an IAM role"}
+    ],
+    "Lambda": [
+        {"command": "aws lambda list-functions", "description": "List all Lambda functions"},
+        {"command": "aws lambda create-function --function-name <name> --runtime <runtime> --role <role-arn> --handler <handler> --zip-file fileb://<file>.zip", "description": "Create a new Lambda function"},
+        {"command": "aws lambda update-function-code --function-name <name> --zip-file fileb://<file>.zip", "description": "Update code for an existing Lambda function"},
+        {"command": "aws lambda delete-function --function-name <name>", "description": "Delete a Lambda function"},
+        {"command": "aws lambda invoke --function-name <name> output.txt", "description": "Invoke a Lambda function and write the output to a file"}
+    ],
+    "RDS": [
+        {"command": "aws rds describe-db-instances", "description": "List all RDS instances"},
+        {"command": "aws rds create-db-instance --db-instance-identifier <db-instance-identifier> --allocated-storage <size> --db-instance-class <instance-class> --engine <engine>", "description": "Create a new RDS instance"},
+        {"command": "aws rds modify-db-instance --db-instance-identifier <db-instance-identifier> --apply-immediately --allocated-storage <size>", "description": "Modify an RDS instance"},
+        {"command": "aws rds delete-db-instance --db-instance-identifier <db-instance-identifier> --skip-final-snapshot", "description": "Delete an RDS instance"},
+        {"command": "aws rds reboot-db-instance --db-instance-identifier <db-instance-identifier>", "description": "Reboot an RDS instance"}
+    ],
+    "CloudWatch": [
+        {"command": "aws cloudwatch list-metrics", "description": "List all CloudWatch metrics"},
+        {"command": "aws cloudwatch get-metric-statistics --metric-name <metric-name> --namespace <namespace> --start-time <start-time> --end-time <end-time> --period <period> --statistics <statistics>", "description": "Retrieve metric statistics from CloudWatch"},
+        {"command": "aws cloudwatch put-metric-alarm --alarm-name <alarm-name> --metric-name <metric-name> --namespace <namespace> --statistic <statistic> --period <period> --threshold <threshold> --comparison-operator <comparison-operator> --evaluation-periods <evaluation-periods> --alarm-actions <sns-topic-arn>", "description": "Create a CloudWatch alarm"},
+        {"command": "aws cloudwatch delete-alarms --alarm-names <alarm-names>", "description": "Delete CloudWatch alarms"}
+    ],
+    "SQS": [
+        {"command": "aws sqs create-queue --queue-name <queue-name>", "description": "Create a new SQS queue"},
+        {"command": "aws sqs list-queues", "description": "List all SQS queues"},
+        {"command": "aws sqs send-message --queue-url <queue-url> --message-body <message>", "description": "Send a message to an SQS queue"},
+        {"command": "aws sqs receive-message --queue-url <queue-url>", "description": "Receive a message from an SQS queue"},
+        {"command": "aws sqs delete-queue --queue-url <queue-url>", "description": "Delete an SQS queue"}
+    ],
+    "SNS": [
+        {"command": "aws sns create-topic --name <topic-name>", "description": "Create a new SNS topic"},
+        {"command": "aws sns list-topics", "description": "List all SNS topics"},
+        {"command": "aws sns subscribe --topic-arn <topic-arn> --protocol <protocol> --notification-endpoint <endpoint>", "description": "Subscribe to an SNS topic"},
+        {"command": "aws sns publish --topic-arn <topic-arn> --message <message>", "description": "Publish a message to an SNS topic"},
+        {"command": "aws sns delete-topic --topic-arn <topic-arn>", "description": "Delete an SNS topic"}
+    ],
+    "CloudFormation": [
+        {"command": "aws cloudformation create-stack --stack-name <stack-name> --template-body file://<template-file>.yaml", "description": "Create a new CloudFormation stack"},
+        {"command": "aws cloudformation update-stack --stack-name <stack-name> --template-body file://<template-file>.yaml", "description": "Update an existing CloudFormation stack"},
+        {"command": "aws cloudformation delete-stack --stack-name <stack-name>", "description": "Delete a CloudFormation stack"},
+        {"command": "aws cloudformation describe-stacks --stack-name <stack-name>", "description": "Describe a CloudFormation stack"},
+        {"command": "aws cloudformation list-stacks", "description": "List all CloudFormation stacks"}
+    ],
+    "ECS": [
+        {"command": "aws ecs list-clusters", "description": "List all ECS clusters"},
+        {"command": "aws ecs describe-clusters --clusters <cluster-name>", "description": "Describe an ECS cluster"},
+        {"command": "aws ecs list-tasks --cluster <cluster-name>", "description": "List tasks in an ECS cluster"},
+        {"command": "aws ecs stop-task --cluster <cluster-name> --task <task-id>", "description": "Stop a task in an ECS cluster"},
+        {"command": "aws ecs run-task --cluster <cluster-name> --task-definition <task-def-name>", "description": "Run a task in an ECS cluster"}
+    ],
+    "ELB": [
+        {"command": "aws elbv2 describe-load-balancers", "description": "List all load balancers"},
+        {"command": "aws elbv2 create-load-balancer --name <lb-name> --subnets <subnet-ids>", "description": "Create a new load balancer"},
+        {"command": "aws elbv2 delete-load-balancer --load-balancer-arn <lb-arn>", "description": "Delete a load balancer"},
+        {"command": "aws elbv2 describe-target-groups", "description": "List all target groups"},
+        {"command": "aws elbv2 create-target-group --name <tg-name> --protocol <protocol> --port <port> --vpc-id <vpc-id>", "description": "Create a new target group"},
+        {"command": "aws elbv2 register-targets --target-group-arn <tg-arn> --targets Id=<instance-id>", "description": "Register targets with a target group"}
+    ],
+    "VPC": [
+        {"command": "aws ec2 describe-vpcs", "description": "List all VPCs"},
+        {"command": "aws ec2 create-vpc --cidr-block <cidr-block>", "description": "Create a new VPC"},
+        {"command": "aws ec2 delete-vpc --vpc-id <vpc-id>", "description": "Delete a VPC"},
+        {"command": "aws ec2 describe-subnets --filters Name=vpc-id,Values=<vpc-id>", "description": "List subnets in a VPC"},
+        {"command": "aws ec2 create-subnet --vpc-id <vpc-id> --cidr-block <cidr-block>", "description": "Create a new subnet in a VPC"},
+        {"command": "aws ec2 delete-subnet --subnet-id <subnet-id>", "description": "Delete a subnet in a VPC"}
+    ],
+    "Route53": [
+        {"command": "aws route53 list-hosted-zones", "description": "List all Route53 hosted zones"},
+        {"command": "aws route53 create-hosted-zone --name <domain-name> --caller-reference <reference>", "description": "Create a new hosted zone"},
+        {"command": "aws route53 delete-hosted-zone --id <zone-id>", "description": "Delete a hosted zone"},
+        {"command": "aws route53 list-resource-record-sets --hosted-zone-id <zone-id>", "description": "List DNS records in a hosted zone"},
+        {"command": "aws route53 change-resource-record-sets --hosted-zone-id <zone-id> --change-batch file://<change-batch-file>.json", "description": "Change DNS records in a hosted zone"}
+    ]
+}
