@@ -19,9 +19,12 @@ Currently, Oppie is tailored for AWS, but future updates will expand its capabil
 Users engage with Oppie through a web-based chat interface. For example, you can ask:
 - "How many S3 buckets are in my AWS account?"
 - "List all EC2 instances in the us-east-1 region."
-- "what is the cuurent month's AWS cost?="
+- "what is the cuurent month's AWS cost?"
 
 ![image](https://github.com/user-attachments/assets/6934b7c9-255d-499f-ab55-efb1f1b2574b)
+
+![image](https://github.com/user-attachments/assets/d81033eb-c3cc-4edd-83d6-3bf0ec006db7)
+
 
 
 ### **2. Command Generation**
