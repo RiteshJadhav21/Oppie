@@ -57,7 +57,7 @@ Oppie will soon support additional DevOps tools beyond AWS, making it a versatil
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/your-repo/oppie-devops-chatbot.git
-   cd oppie-devops-chatbot
+   cd chatbot
    ```
 
 2. **Install the required dependencies:**
