@@ -8,12 +8,21 @@
 
 Currently, Oppie is tailored for AWS, but future updates will expand its capabilities to include other essential DevOps tools.
 
+## **Web Interface**
+
+![image](https://github.com/user-attachments/assets/a56665b8-1b98-4e0d-af58-8e2a3a2506c7)
+
+
 ## **How Oppie Works**
 
 ### **1. User Interaction**
 Users engage with Oppie through a web-based chat interface. For example, you can ask:
 - "How many S3 buckets are in my AWS account?"
 - "List all EC2 instances in the us-east-1 region."
+- "what is the cuurent month's AWS cost?="
+
+![image](https://github.com/user-attachments/assets/6934b7c9-255d-499f-ab55-efb1f1b2574b)
+
 
 ### **2. Command Generation**
 Oppie interprets the user's query and uses Azure OpenAI to generate the appropriate AWS CLI command. The bot references a predefined set of AWS commands to ensure accuracy.
