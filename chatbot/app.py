@@ -2,22 +2,28 @@ from flask import Flask, render_template, request, jsonify
 import subprocess
 import json
 import logging
+import openai
 
 # Load AWS commands data
 with open('aws_commands.json', 'r') as f:
     AWS_COMMANDS = json.load(f)
 
+# Azure OpenAI configuration
 API_KEY = "XYZ"
-AZURE_ENDPOINT = "https://chat-model.openai.azure.com/"
-API_VERSION = "2024-02-01"
+AZURE_ENDPOINT = "https://your-azure-endpoint.openai.azure.com/"  # Update with your actual endpoint
 MODEL = "gpt-35-turbo-0613"
+
+# Set up OpenAI API with Azure settings
+openai.api_key = API_KEY
+openai.api_base = AZURE_ENDPOINT
+openai.api_type = "azure"
+openai.api_version = "2024-02-01"  # Use the correct API version
 
 SYSTEM_MSG = (
     "Act as an AWS Engineer who is expert in creating AWS CLI Commands. "
     "Cross-reference your response with the provided AWS command list."
 )
 
-client = AzureOpenAI(api_key=API_KEY, azure_endpoint=AZURE_ENDPOINT, api_version=API_VERSION)
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 
@@ -58,14 +64,14 @@ def search_command_in_reference(user_input):
     return None
 
 def generate_command_with_openai(user_input):
-    result = client.chat.completions.create(
+    response = openai.ChatCompletion.create(
+        model=MODEL,
         messages=[
             {"role": "system", "content": SYSTEM_MSG},
             {"role": "user", "content": user_input}
-        ],
-        model=MODEL
+        ]
     )
-    return result.choices[0].message.content.strip()
+    return response.choices[0].message['content'].strip()
 
 def execute_aws_command(command):
     try:
@@ -76,13 +82,13 @@ def execute_aws_command(command):
         raise Exception(f"Command execution failed: {e.output.decode('utf-8')}")
 
 def convert_output_to_human_readable(output):
-    result = client.chat.completions.create(
+    response = openai.ChatCompletion.create(
+        model=MODEL,
         messages=[
             {"role": "system", "content": f"Convert this CLI output data into a human-readable format: {output}"}
-        ],
-        model=MODEL
+        ]
     )
-    return result.choices[0].message.content.strip()
+    return response.choices[0].message['content'].strip()
 
 if __name__ == '__main__':
     app.run(debug=True)
